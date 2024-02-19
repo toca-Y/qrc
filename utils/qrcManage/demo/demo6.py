@@ -13,12 +13,11 @@ from utils.qrcManage.setting import qrc, defaultCfg, ResourceCfg, defaultRcc, cf
 
 qrc.load_cfg_all_py_rcc(defaultCfg.name, ignore_error=True)
 printExc.enable = False
+
 button_fields = {
     'copy'  : ':/config/static/copy.svg',
     'jumpto': ':/config/static/jumpto.svg',
 }
-
-# print(qrc.load_cfg_py_rcc("icon.icon"))
 
 
 class BaseFrame(QFrame):
@@ -79,7 +78,7 @@ class BaseLayer(BaseFrame):
         self.top_operate = QFrame()
         self.top_layout = QGridLayout(self.top_operate)
         self.tw = QTableWidget()
-        self.pb_refresh = self.BTN('刷新')
+        self.pb_refresh = self.BTN('刷新', ':/icon/svg/刷新.svg')
     
     def _init_setting(self):
         self.pb_refresh.clicked.connect(self.refresh)
@@ -93,8 +92,10 @@ class BaseLayer(BaseFrame):
         self.load_tw_header()
         self.load_tw_info(self.info())
     
-    def BTN(self, *args, **kwargs) -> 'QPushButton':
-        btn = QPushButton(*args, **kwargs)
+    def BTN(self, text='', icon=None, **kwargs) -> 'QPushButton':
+        btn = QPushButton(text, **kwargs)
+        if icon:
+            btn.setIcon(QIcon(icon))
         self.add_btn(btn)
         return btn
     
@@ -220,7 +221,7 @@ class LayerFile(BaseLayer):
         self.pb_delete = self.BTN('删除')
         self.pb_paste_svg = self.BTN('粘贴SVG')
         self.pb_show_files = self.BTN('全显示')
-        self.pb_save = self.BTN('保存')
+        self.pb_save = self.BTN('保存', ':/icon/svg/另存为.svg')
     
     def _init_setting(self):
         super()._init_setting()
@@ -496,10 +497,10 @@ class LayerCfg(BaseLayer):
     
     def _init_argument(self):
         super()._init_argument()
-        self.pb_add = self.BTN('新增')
+        self.pb_add = self.BTN('新增', ':/icon/svg/新增.svg')
         self.pb_change = self.BTN('编辑')
-        self.pb_delete = self.BTN('删除')
-        self.pb_save_cfg = self.BTN('保存配置')
+        self.pb_delete = self.BTN('删除', ':/icon/svg/垃圾桶.svg')
+        self.pb_save_cfg = self.BTN('保存配置', ':/icon/svg/另存为.svg')
     
     def _init_setting(self):
         super()._init_setting()
