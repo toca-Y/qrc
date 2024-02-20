@@ -115,7 +115,7 @@ class ResourceCfg:
     
     def __init__(self, name, resource_dir=None, load_dir=None, py_qrc_prefix=None, **kwargs):
         self.name = name
-        self.resource_dir = resource_dir or self._resource_dir
+        self.resource_dir = resource_dir or name or self._resource_dir
         # self.load_dir = load_dir or self._load_dir
         self.py_qrc_prefix = py_qrc_prefix or self._py_qrc_prefix
         _cfg_list[name] = self
